@@ -1,0 +1,12 @@
+{% extends "ideal_event/base.html" %} {% block body_block %} 
+{% if user.is_authenticated %}
+<form method="POST">
+  {% csrf_token %}
+  <h4>select ur interests
+  </h4>
+  {{form}}
+  
+  <button type="submit">submit</button>
+</form>
+{% endif %} 
+{% endblock %}
