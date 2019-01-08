@@ -1,0 +1,109 @@
+<!-- {% extends "ideal_event/base.html" %} {% block body_block %} -->
+<style>
+  body {
+    margin: 0;
+  }
+
+  /* Let's get this party started */
+#scroller::-webkit-scrollbar {
+    width: 0px;
+    height: 0;
+    visibility: hidden;
+}
+ 
+/* Track */
+#scroller::-webkit-scrollbar-track {
+      width: 0px;
+      height: 0;
+visibility: hidden;
+}
+ 
+/* Handle */
+#scroller::-webkit-scrollbar-thumb {
+    width: 0px;
+      height: 0;
+visibility: hidden;
+
+}
+
+</style>
+    <br /><br />
+
+<div>
+  <div>
+    <!-- {% if user.is_authenticated %} -->
+    <h2 align="center">recommended for you</h2>
+    <div style="position: relative;">
+      <div id="left" style="width:40px; height: 100%; left:0; border-radius:0 50% 50% 0; position: absolute; background-color: rgba(15, 1, 15, 0.2)"></div>
+      <div id="right" style="width:40px; height: 100%; right:0; border-radius:50% 0 0 50%; position: absolute; background-color: rgba(15, 1, 15, 0.2)"></div>
+
+      <div id="scroller" style="background:rgba(0, 128, 0, 0);  width: 100%; height:200px; overflow-y: hidden;  display:flex; overflow-x:auto;">
+        <div style="padding: 100px; margin-left: 5px; background-size: cover; background-image:url('1.jpg');"></div>
+        <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('2.jpg');"></div>
+        <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('3.jpg');"></div>
+        <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('4.jpg');"></div>
+        <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('5.jpg');"></div>
+        <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('2.jpg');"></div>
+        <div style="padding: 100px; display: inline-block; margin-left: 5px; background:rgb(14, 207, 14);"></div>
+        <div style="padding: 100px; display: inline-block; margin-left: 5px; background:rgb(14, 207, 14);"></div>
+        <div style="padding: 100px; display: inline-block; margin-left: 5px; background:rgb(14, 207, 14);"></div>
+        <div style="padding: 100px; display: inline-block; margin-left: 5px; background:rgb(14, 207, 14);"></div>
+        <div style="padding: 100px; display: inline-block; margin-left: 5px; background:rgb(14, 207, 14);"></div>
+        <div style="padding: 100px; display: inline-block; margin-left: 5px; background:rgb(207, 14, 104);"></div>
+      </div>
+    </div>
+    <h2 align="center">Your interests</h2>
+    <div style="background:rgba(0, 128, 0, 0);flex-wrap: wrap;  width: 100%; align-content: center; justify-content: center; display:flex; ">
+      <div style="padding: 100px; margin-left: 5px; background-size: cover; background-image:url('1.jpg');"></div>
+      <div style="padding: 100px; display: inline-block; margin-left: 5px; margin-top:5px; background-size: cover; background-image:url('2.jpg');"></div>
+      <div style="padding: 100px; display: inline-block; margin-left: 5px; margin-top:5px;  background-size: cover; background-image:url('3.jpg');"></div>
+      <div style="padding: 100px; display: inline-block; margin-left: 5px; margin-top:5px; background-size: cover; background-image:url('4.jpg');"></div>
+      <div style="padding: 100px; display: inline-block; margin-left: 5px; margin-top:5px; background-size: cover; background-image:url('5.jpg');"></div>
+      <div style="padding: 100px; display: inline-block; margin-left: 5px; margin-top:5px; background-size: cover; background-image:url('5.jpg');"></div>
+      <div style="padding: 100px; display: inline-block; margin-left: 5px; margin-top:5px; background-size: cover; background-image:url('5.jpg');"></div>
+      <div style="padding: 100px; display: inline-block; margin-left: 5px; margin-top:5px; background-size: cover; background-image:url('5.jpg');"></div>
+      <div style="padding: 100px; display: inline-block; margin-left: 5px; margin-top:5px; background-size: cover; background-image:url('5.jpg');"></div>
+      <div style="padding: 100px; display: inline-block; margin-left: 5px; margin-top:5px; background-size: cover; background-image:url('5.jpg');"></div>
+    
+    </div>
+    <!-- {% else %} -->
+    <!-- <h2>Register or Login if you'd like to</h2> -->
+    <!-- {% endif %} -->
+  </div>
+</div>
+<!-- {% endblock %} -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+
+
+    $('#right').mouseenter(function () {
+
+      interR = setInterval(function () {
+        window.document.getElementById('scroller').scrollBy(40, 0);
+      }, 100);
+
+
+    });
+
+
+    $('#right').mouseleave(function () {
+      clearInterval(interR);
+    });
+
+
+    $('#left').mouseenter(function () {
+
+      inter = setInterval(function () {
+        window.document.getElementById('scroller').scrollBy(-40, 0);
+      }, 100);
+    });
+
+    $('#left').mouseleave(function () {
+      clearInterval(inter);
+    });
+
+
+  });
+
+</script>
