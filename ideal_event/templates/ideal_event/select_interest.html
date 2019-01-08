@@ -4,10 +4,7 @@
   {% csrf_token %}
   <h4>select ur interests
   </h4>
-  {% for i in interest %}
-  <input type="checkbox" name="interest_name" value="{{ i.id }}" > {{ i.name }} <br>
-  <input type="range" name="interest_level" min="0" max="5" value="{{ i.interest_level }}" class="slider" id="myRange" >{{ i.interest_level }}
-  {% endfor %}
+  {{form}}
   
   <button type="submit">submit</button>
 </form>

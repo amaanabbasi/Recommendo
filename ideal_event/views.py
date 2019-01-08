@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from ideal_event.forms import UserForm, AppUserForm, Interest2Form
-from ideal_event.models import AppUser, Interest, Interest2
+from ideal_event.forms import UserForm, AppUserForm, KeyValForm
+from ideal_event.models import AppUser, Interest, Interest2,KeyVal
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -34,22 +34,22 @@ def process(request):  # data algo
 
 @login_required
 def select_interests(request):
-    select_interest_form = Interest2Form(request.POST or None)
+    # select_interest_form = Interest2Form(request.POST or None)
+    # interest = Interest.objects.all()
+    form=KeyValForm(request.POST or None)
     interest = Interest.objects.all()
     instance = None
     if request.method == "POST":
-        if select_interest_form.is_valid():
-            print(select_interest_form.cleaned_data['interest_name'])
-            print(select_interest_form.cleaned_data['interest_level'])
-            interest2 = select_interest_form.save(commit=False)
+        if form.is_valid():
+            interest2 = form.save(commit=False)
             interest2.save()
-            select_interest_form.save_m2m()
-    if select_interest_form.errors:
-        print(select_interest_form.errors)
+            form.save_m2m()
+    if form.errors:
+        print(form.errors)
     context = {
-        "select_interest_form": select_interest_form,
-        "interest": interest,
-        "instance": instance
+        "form": form,
+        "instance": instance,
+        "interest": interest
     }
 
     return render(request, 'ideal_event/select_interest.html', context=context)
