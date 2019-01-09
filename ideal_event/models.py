@@ -47,5 +47,8 @@ class KeyVal(models.Model):
     def __str__(self):
         return self.container.name + ": " + str(self.interest_level)
 
+class Grp(models.Model):
+    name=models.CharField(max_length=30)
+    appUsers = models.ManyToManyField(AppUser)
 # class Groups(models.Model):
 #     names = models.ManyToManyField()

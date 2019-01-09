@@ -1,6 +1,8 @@
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.shortcuts import render
 from ideal_event.forms import UserForm, AppUserForm, KeyValForm
-from ideal_event.models import AppUser, Interest,KeyVal
+from ideal_event.models import AppUser, Interest, KeyVal,Grp
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -8,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from . import recommender
 import math
+
 
 def index(request):
     return render(request, 'ideal_event/index.html')
@@ -38,7 +41,7 @@ def select_interests(request):
     # select_interest_form = Interest2Form(request.POST or None)
     interest_count = Interest.objects.all().count()
     # for i in range(interest_count):
-    form=KeyValForm(request.POST or None)
+    form = KeyValForm(request.POST or None)
     interest = Interest.objects.all()
     print(interest_count)
     instance = None
@@ -105,19 +108,17 @@ def user_login(request):
     else:
         return render(request, 'ideal_event/login.html', {})
 
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 @receiver(post_save, sender=KeyVal)
 def add_to_profile(sender, instance, created, **kwargs):
     if created:
         print("created")
-        users=AppUser.objects.all()
+        users = AppUser.objects.all()
         # latest=AppUser.objects.all().reverse()[0]
-        latest=users[::-2][0]
+        latest = users[::-2][0]
         data = {}
         # for user in users:
-        #     for i in range(user.interests.all().count()): 
+        #     for i in range(user.interests.all().count()):
         #         user_int=user.interests.all()[i].container.name
         #         user_int_lvl=float(user.interests.all()[i].interest_level)
         #         usertpl=(user_int, user_int_lvl)
@@ -125,18 +126,38 @@ def add_to_profile(sender, instance, created, **kwargs):
         #         latest_int_lvl=float(latest.interests.all()[i].interest_level)
         #         latesttpl=(latest_int,latest_int_lvl)
         for user in users:
-            interests=user.interests.all()
+            interests = user.interests.all()
             data[user.name] = {}
             for interest in interests:
                 # data[user.name] = {interest.container.name:float(interest.interest_level)}
-                data[user.name].update({interest.container.name:float(interest.interest_level)})
- 
+                data[user.name].update(
+                    {interest.container.name: float(interest.interest_level)})
+
         print(data)
     print(latest.name)
     # import pdb; pdb.set_trace()
     persons = list(data.keys())
     print(persons)
     # import pdb; pdb.set_trace()
+    l = []
     for person in persons:
-	    print(f"{person}: {recommender.pearson_similarity(datas=data, person1=person, person2=latest.name)}")
+        print(f"{person}: {recommender.euclidean_similarity(datas=data, person1=person, person2=latest.name)}")
+        l.append((person,(recommender.euclidean_similarity(datas=data, person1=person, person2=latest.name))))
+    # print(l)
+    l.sort()
+    l.reverse()
+    print(l)
+    print(l[:3])
+    
+    group = []
+    for u in l[:3]:
+        print(u[0])
+        group.append(AppUser.objects.get(name=u[0]))
 
+    print(group)
+
+    # for u in group:
+    #     b=Grp(appUsers=u)
+    #     b.save()
+    b = Grp.objects.create()
+    b.appUsers.set(group)
