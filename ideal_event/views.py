@@ -13,7 +13,13 @@ import math
 
 
 def index(request):
-    return render(request, 'ideal_event/index.html')
+    ol = Grp.objects.all()
+    it=Interest.objects.all()
+    context={
+        "ol": ol,
+        "it": it
+    }
+    return render(request, 'ideal_event/index.html', context)
 
 
 @login_required

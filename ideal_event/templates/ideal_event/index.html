@@ -1,17 +1,21 @@
 {% extends "ideal_event/base.html" %}{% load static %} {% block body_block %}
 <div class="container">
   <div class="jumbotron">
-    <h1>Welcome to the Ideal Book !</h1>
+    <h1 style="margin: 0 auto;text-align:center">Welcome to the Recommendo!</h1>
     <div>
       <div>
+        <br>
         {% if user.is_authenticated %}
-        <h2 align="center">recommended for you</h2>
+        <h2 style="margin: 0 auto;text-align:center">recommended for you</h2>
         <div style="position: relative;">
           <div id="left" style="width:40px; height: 100%; left:0; border-radius:0 50% 50% 0; position: absolute; background-color: rgba(15, 1, 15, 0.2)"></div>
           <div id="right" style="width:40px; height: 100%; right:0; border-radius:50% 0 0 50%; position: absolute; background-color: rgba(15, 1, 15, 0.2)"></div>
-    
+          
           <div id="scroller" style="background:rgba(0, 128, 0, 0);  width: 100%; height:200px; overflow-y: hidden;  display:flex; overflow-x:auto;">
-            <div style="padding: 100px; margin-left: 5px; background-size: cover; background-image:url('1.jpg');"></div>
+              {% for i in ol %}
+              {{i.appUser}}
+              {% endfor %}
+            <!-- <div style="padding: 100px; margin-left: 5px; background-size: cover; background-image:url('1.jpg');"></div>
             <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('2.jpg');"></div>
             <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('3.jpg');"></div>
             <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('4.jpg');"></div>
@@ -22,16 +26,21 @@
             <div style="padding: 100px; display: inline-block; margin-left: 5px; background:rgb(14, 207, 14);"></div>
             <div style="padding: 100px; display: inline-block; margin-left: 5px; background:rgb(14, 207, 14);"></div>
             <div style="padding: 100px; display: inline-block; margin-left: 5px; background:rgb(14, 207, 14);"></div>
-            <div style="padding: 100px; display: inline-block; margin-left: 5px; background:rgb(207, 14, 104);"></div>
+            <div style="padding: 100px; display: inline-block; margin-left: 5px; background:rgb(207, 14, 104);"></div> -->
           </div>
         </div>
-        <h2 align="center">Your interests</h2>
-        <div style="background:rgba(0, 128, 0, 0);  width: 100%; align-content: center; justify-content: center; display:flex; overflow-x:auto;">
-          <div style="padding: 100px; margin-left: 5px; background-size: cover; background-image:url('1.jpg');"></div>
+        <br>
+        <h2 style="margin: 0 auto;text-align:center">Your interests</h2>
+        <div style="background:rgba(0, 128, 0, 0);text-align: center;  width: 100%; align-content: center; justify-content: center; display:flex; overflow-x:auto;">
+          {% for j in it %}
+          <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url({ideal_event.image.url});">{{j}}</div>
+          
+          {% endfor %}
+          <!-- <div style="padding: 100px; margin-left: 5px; background-size: cover; background-image:url('1.jpg');"></div>
           <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('2.jpg');"></div>
           <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('3.jpg');"></div>
           <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('4.jpg');"></div>
-          <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('5.jpg');"></div>
+          <div style="padding: 100px; display: inline-block; margin-left: 5px; background-size: cover; background-image:url('5.jpg');"></div> -->
         </div>
         {% else %}
         <h2>Register or Login if you'd like to</h2>
