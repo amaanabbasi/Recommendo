@@ -2,7 +2,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.shortcuts import render
 from ideal_event.forms import UserForm, AppUserForm, KeyValForm
-from ideal_event.models import AppUser, Interest, KeyVal,Grp
+from ideal_event.models import AppUser, Interest, KeyVal, Grp
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -14,8 +14,8 @@ import math
 
 def index(request):
     ol = Grp.objects.all()
-    it=Interest.objects.all()
-    context={
+    it = Interest.objects.all()
+    context = {
         "ol": ol,
         "it": it
     }
@@ -120,8 +120,8 @@ def add_to_profile(sender, instance, created, **kwargs):
     if created:
         print("created")
         users = AppUser.objects.all()
-        # latest=AppUser.objects.all().reverse()[0]
-        latest = users[::-2][0]
+        # latest = AppUser.objects.all().reverse()[0]
+        latest = users[::-2][0]  # latest user created
         data = {}
         # for user in users:
         #     for i in range(user.interests.all().count()):
@@ -148,13 +148,14 @@ def add_to_profile(sender, instance, created, **kwargs):
     l = []
     for person in persons:
         print(f"{person}: {recommender.euclidean_similarity(datas=data, person1=person, person2=latest.name)}")
-        l.append((person,(recommender.euclidean_similarity(datas=data, person1=person, person2=latest.name))))
+        l.append((person, (recommender.euclidean_similarity(
+            datas=data, person1=person, person2=latest.name))))
     # print(l)
     l.sort()
     l.reverse()
     print(l)
     print(l[:3])
-    
+
     group = []
     for u in l[:3]:
         print(u[0])
