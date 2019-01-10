@@ -80,7 +80,7 @@ visibility: hidden;
     $('#right').mouseenter(function () {
 
       interR = setInterval(function () {
-        window.document.getElementById('scroller').scrollBy(40, 0);
+        $('#scroller').scrollBy(40, 0);
       }, 100);
 
 
@@ -95,7 +95,7 @@ visibility: hidden;
     $('#left').mouseenter(function () {
 
       inter = setInterval(function () {
-        window.document.getElementById('scroller').scrollBy(-40, 0);
+        $('#scroller').scrollBy(-40, 0);
       }, 100);
     });
 
