@@ -14,29 +14,27 @@
       body {
         margin: 0;
       }
-    
+
       /* Let's get this party started */
-    #scroller::-webkit-scrollbar {
+      #scroller::-webkit-scrollbar {
         width: 0px;
         height: 0;
         visibility: hidden;
-    }
-     
-    /* Track */
-    #scroller::-webkit-scrollbar-track {
-          width: 0px;
-          height: 0;
-    visibility: hidden;
-    }
-     
-    /* Handle */
-    #scroller::-webkit-scrollbar-thumb {
+      }
+
+      /* Track */
+      #scroller::-webkit-scrollbar-track {
         width: 0px;
-          height: 0;
-    visibility: hidden;
-    
-    }
-    
+        height: 0;
+        visibility: hidden;
+      }
+
+      /* Handle */
+      #scroller::-webkit-scrollbar-thumb {
+        width: 0px;
+        height: 0;
+        visibility: hidden;
+      }
     </style>
   </head>
   <body>
@@ -44,7 +42,9 @@
       <div class="container">
         <ul class="nav navbar-nav">
           {# Django Home Link / Admin Link / Register Link#}
-          <li><a class="navbar-brand" href="{% url 'index' %}">Recommendo</a></li>
+          <li>
+            <a class="navbar-brand" href="{% url 'index' %}">Recommendo</a>
+          </li>
           <li>
             <a class="navbar-link" href="{% url 'admin:index' %}">Admin</a>
           </li>
@@ -53,12 +53,19 @@
               >Register</a
             >
           </li>
+          <li>
+            <a class="navbar-link" href="{% url 'ideal_event:select_interest' %}"
+              >Select Interests</a
+            >
+          </li>
           {# Some logic on what to display for last item#} 
           {% if user.is_authenticated %}
           <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
           <li>
-            <a class="navbar-link" href="{% url 'ideal_event:user_login' %}">Login</a>
+            <a class="navbar-link" href="{% url 'ideal_event:user_login' %}"
+              >Login</a
+            >
           </li>
           {% endif %}
         </ul>

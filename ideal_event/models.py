@@ -26,9 +26,6 @@ class AppUser(models.Model):
     timezone = models.IntegerField(default=0)
     # friends = models.ManyToManyField('self')
     interests = models.ManyToManyField('KeyVal')
-    # interests =models.ForeignKey(
-
-    # )
 
     def __str__(self):
         return self.user_id.username
@@ -70,5 +67,3 @@ class KeyVal(models.Model):
 class Grp(models.Model):
     name = models.CharField(max_length=30)
     appUsers = models.ManyToManyField(AppUser)
-# class Groups(models.Model):
-#     names = models.ManyToManyField()

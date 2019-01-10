@@ -10,5 +10,4 @@ urlpatterns = [
     url(r'^select_interest/$', views.select_interests, name='select_interest'),
     # path('/process/', views.process, name='process'),
     # url('/process/', views.process, name='process'),
-
 ]
