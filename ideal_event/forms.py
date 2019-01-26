@@ -14,7 +14,7 @@ class AppUserForm(forms.ModelForm):
 
     class Meta():
         model = AppUser
-        fields = ('user_id', 'profile_pic', 'locale', 'birthyear',
+        fields = ('profile_pic', 'locale', 'birthyear',
                   'gender', 'location', 'timezone')
 
 
