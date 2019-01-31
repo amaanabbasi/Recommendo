@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 def upload_location(instance, filename):
@@ -67,3 +69,9 @@ class KeyVal(models.Model):
 class Grp(models.Model):
     name = models.CharField(max_length=30)
     appUsers = models.ManyToManyField(AppUser)
+
+
+@receiver(post_save, sender=User)
+def ensure_profile_exists(sender, **kwargs):
+    if kwargs.get('created', False):
+        AppUser.objects.get_or_create(user_id=kwargs.get('instance'))
