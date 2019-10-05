@@ -74,12 +74,12 @@ visibility: hidden;
 <!-- {% endblock %} -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-  $(document).ready(function () {
+  $(document).ready(() => {
 
 
-    $('#right').mouseenter(function () {
+    $('#right').mouseenter(() => {
 
-      interR = setInterval(function () {
+      interR = setInterval(() => {
         $('#scroller').scrollBy(40, 0);
       }, 100);
 
@@ -87,19 +87,19 @@ visibility: hidden;
     });
 
 
-    $('#right').mouseleave(function () {
+    $('#right').mouseleave(() => {
       clearInterval(interR);
     });
 
 
-    $('#left').mouseenter(function () {
+    $('#left').mouseenter(() => {
 
-      inter = setInterval(function () {
+      inter = setInterval(() => {
         $('#scroller').scrollBy(-40, 0);
       }, 100);
     });
 
-    $('#left').mouseleave(function () {
+    $('#left').mouseleave(() => {
       clearInterval(inter);
     });
 
