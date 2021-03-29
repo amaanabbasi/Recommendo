@@ -78,7 +78,7 @@ ptyprocess==0.6.0
 pycodestyle==2.4.0
 pydocstyle==3.0.0
 pyensae==1.2.788
-Pygments==2.3.1
+Pygments==2.7.4
 pylint==2.2.2
 pyparsing==2.3.0
 pyquickhelper==1.8.2912
